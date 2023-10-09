@@ -1,5 +1,8 @@
 # ECommerce
-A simple NodeJs e-commerce project
+<p>A simple NodeJs e-commerce project</p>
+
+> [!NOTE]  
+> This project is for educational purposes only
 
 ## Features:
 - [ ] Display list of Laptop
@@ -9,7 +12,7 @@ A simple NodeJs e-commerce project
 - [ ] Order management for Administrator
 - [ ] Laptop management for Administrator
 
-## Contributors: vuqu4ngminh, H1epVu, lemon0972
-
-> [!NOTE]  
-> This project is for educational purposes only
+## Contributors: 
+* vuqu4ngminh
+* H1epVu
+* lemon0972

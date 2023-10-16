@@ -5,7 +5,7 @@
 > This project is for educational purposes only
 
 ## Features:
-- [ ] Display list of Laptop
+- [x] Display list of Laptop
 - [ ] Display infomations of a single Laptop
 - [ ] Cart and Payment
 - [ ] Authentication for Administrator

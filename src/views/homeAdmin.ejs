@@ -1,0 +1,42 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <title>Quản Trị Viên</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse d-flex justify-content-between">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link <%= activeTab === 'adminHome' ? 'active' : '' %>" href="/admin/home">Trang Chủ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <%= activeTab === 'adminLaptop' ? 'active' : '' %>" href="/admin/laptop">Quản Lý Sản Phẩm</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <%= activeTab === 'adminOrder' ? 'active' : '' %>" href="javascript:void(0)">Quản Lý Đơn Hàng</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <%= activeTab === 'adminInfo' ? 'active' : '' %>" href="javascript:void(0)">Thông Tin Quản Trị Viên</a>
+                    </li>
+                </ul>
+                <form method="post" action="/admin/logout" class="mb-0">
+                    <button type="submit" class="btn btn-danger logout"><i class="bi bi-box-arrow-right"></i></button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>Hello</h1>
+    </div>
+</body>
+
+</html>

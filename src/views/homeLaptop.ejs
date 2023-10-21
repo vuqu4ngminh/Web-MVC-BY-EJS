@@ -1,0 +1,123 @@
+<% 
+function formatNumber(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+%>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <title>Quản Trị Viên</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse d-flex justify-content-between">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link <%= activeTab === 'adminHome' ? 'active' : '' %>" href="/admin/home">Trang Chủ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <%= activeTab === 'adminLaptop' ? 'active' : '' %>" href="/admin/laptop">Quản Lý Sản Phẩm</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <%= activeTab === 'adminOrder' ? 'active' : '' %>" href="javascript:void(0)">Quản Lý Đơn Hàng</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <%= activeTab === 'adminInfo' ? 'active' : '' %>" href="javascript:void(0)">Thông Tin Quản Trị Viên</a>
+                    </li>
+                </ul>
+                <form method="post" action="/admin/logout" class="mb-0">
+                    <button type="submit" class="btn btn-danger logout"><i class="bi bi-box-arrow-right"></i></button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="header-laptop mt-5 d-flex justify-content-between">
+                <h3>Quản Lý Laptop</h3>
+                <div class="d-flex">
+                    <form class="search-form-laptop" method="post" action="/admin/laptop">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Tìm theo mã laptop" name="searchLaptop" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="text-white">
+                        <a href="/admin/laptop" class="btn btn-warning"><i class="bi bi-arrow-clockwise"></i></a>
+                    </div>
+                </div>
+            </div>
+            <% if(searchLaptop.length > 0) { %>
+                <div class="alert alert-danger mt-3 mb-3"><%= searchLaptop %></div>
+            <% } else if(deleteLaptop.length > 0){ %>
+                <div class="alert alert-success mt-3 mb-3"><%= deleteLaptop %></div>
+            <% } %>
+            <table class="table table-bordered mt-3">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Tên Sản Phẩm</th>
+                        <th scope="col">Giá</th>
+                        <th scope="col">Tình Trạng</th>
+                        <th scope="col" class=" text-right">
+                            <div class="d-flex justify-content-center">
+                                <div class="text-white">
+                                    <a href="/admin/laptop/add" class="btn btn-success">Thêm Laptop</a>
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% data.forEach(function(laptop) { %>
+                        <tr>
+                            <th scope="row"><%= laptop.id %></th>
+                            <td>
+                                <%= laptop.name %>
+                            </td>
+                            <td>
+                                <%= formatNumber(laptop.price) %> VNĐ
+                            </td>
+                            <td>
+                                <% if (laptop.status === '1') { %>
+                                    <div class="text-success fw-bold">Còn hàng</div>
+                                <% } else { %>
+                                    <div class="text-danger fw-bold">Hết hàng</div>
+                                <% } %>
+                            </td>
+                            <td>
+                                <div class="d-flex justify-content-center">
+                                    <div class="action d-flex justify-content-between">
+                                        <form method="get" action="/admin/laptop/update/<%= laptop.id %>">
+                                            <button class="btn btn-primary" type="submit">
+                                                Cập nhật
+                                            </button>
+                                        </form>
+                                        <form method="post" action="/admin/laptop/delete/<%= laptop.id %>">
+                                            <button class="btn btn-danger" type="submit">
+                                                Xóa
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

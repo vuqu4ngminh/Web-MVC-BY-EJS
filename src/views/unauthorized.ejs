@@ -15,22 +15,24 @@
             <div class="collapse navbar-collapse" id="mynavbar">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link <%= activeTab === 'home' ? 'active' : '' %>" href="/">Sản Phẩm</a>
+                        <a class="nav-link" href="/">Sản Phẩm</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <%= activeTab === 'cart' ? 'active' : '' %>" href="/cart">Giỏ Hàng</a>
+                        <a class="nav-link" href="/cart">Giỏ Hàng</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <%= activeTab === 'contact' ? 'active' : '' %>" href="/contact">Liên Hệ</a>
+                        <a class="nav-link" href="/contact">Liên Hệ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <%= activeTab === 'login' ? 'active' : '' %>" href="/admin">Quản Trị Viên</a>
+                        <a class="nav-link" href="/admin">Quản Trị Viên</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-    <div class="container"></div>
+    <div class="container d-flex justify-content-center">
+        <h1 class="mt-5">Bạn không có quyền truy cập</h1>
+    </div>
 </body>
 
 </html>

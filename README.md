@@ -8,9 +8,10 @@
 - [ ] Display list of Laptop
 - [ ] Display infomations of a single Laptop
 - [ ] Cart and Payment
-- [ ] Authentication for Administrator
+- [x] Authentication for Administrator
 - [ ] Order management for Administrator
-- [ ] Laptop management for Administrator
+- [x] Laptop management for Administrator
+- [ ] Administrator management
 
 ## Contributors: 
 * vuqu4ngminh

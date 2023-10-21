@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/bootstrap-icons/font/bootstrap-icons.css">
-    <title>Admin</title>
+    <title>Giỏ Hàng</title>
 </head>
 
 <body>
@@ -15,23 +15,22 @@
             <div class="collapse navbar-collapse" id="mynavbar">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0)">Sản Phẩm</a>
+                        <a class="nav-link <%= activeTab === 'home' ? 'active' : '' %>" href="/">Sản Phẩm</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0)">Giỏ Hàng</a>
+                        <a class="nav-link <%= activeTab === 'cart' ? 'active' : '' %>" href="/cart">Giỏ Hàng</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0)">Liên Hệ</a>
+                        <a class="nav-link <%= activeTab === 'contact' ? 'active' : '' %>" href="/contact">Liên Hệ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <%= activeTab === 'login' ? 'active' : '' %>" href="/admin">Quản Trị Viên</a>
                     </li>
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="text" placeholder="Nhập tên sản phẩm">
-                    <button class="btn btn-primary" type="button"><i class="bi bi-search"></i></button>
-                </form>
             </div>
         </div>
     </nav>
-    <h1>Hello</h1>
+    <div class="container"></div>
 </body>
 
 </html>

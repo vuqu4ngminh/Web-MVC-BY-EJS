@@ -1,0 +1,99 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <title>Quản Trị Viên</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse d-flex justify-content-between">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/home">Trang Chủ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/laptop">Quản Lý Sản Phẩm</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="javascript:void(0)">Quản Lý Đơn Hàng</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:void(0)">Thông Tin Quản Trị Viên</a>
+                    </li>
+                </ul>
+                <form method="post" action="/admin/logout" class="mb-0">
+                    <button type="submit" class="btn btn-danger logout"><i class="bi bi-box-arrow-right"></i></button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="header-laptop mt-5 d-flex justify-content-between">
+                <h3>Cập nhật Laptop</h3>
+                <a class="btn btn-danger" href="/admin/laptop">Quay Lại</a>
+            </div>
+            <% if(message.length> 0) { %>
+                <div class="alert alert-success mt-3 mb-0">
+                    <%= message %>
+                </div>
+            <% } %>
+            <div class="mt-3">
+                <form method="post" action="/admin/laptop/update">
+                    <div class="col">
+                        <div class="col-md-6" style="width: 100%;">
+                            <input type="text" hidden name="id" value="<%= data[0].id %>">
+                            <div class="form-group">
+                                <label class="control-label mt-3 mb-3" for="name">Tên:</label>
+                                <input type="text" class="form-control" name="name" value="<%= data[0].name %>"
+                                    required />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label mt-3 mb-3" for="Price">Giá:</label>
+                                <input type="number" class="form-control" value="<%= data[0].price %>"
+                                    name="price" required />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label mt-3 mb-3" for="image">Đường dẫn ảnh:</label>
+                                <input type="text" class="form-control" value="<%= data[0].imageUrl %>"
+                                    name="image" required />
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label mt-3 mb-3" for="Description">Mô tả:</label>
+                                <textarea class="form-control" name="description" style="height: 200px"
+                                    required><%= data[0].description.trim() %></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="mt-3 mb-3" for="Status">Tình trạng:</label>
+                                <select name="status" class="form-control mb-3">
+                                    <option value="0" <% if (data[0].status==='0' ) { %>selected<% } %>>Hết hàng</option>
+                                    <option value="1" <% if (data[0].status==='1' ) { %>selected<% } %>>Còn hàng</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group d-flex justify-content-end">
+                                <button class="btn btn-success float-right" type="submit">
+                                    Cập nhật
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

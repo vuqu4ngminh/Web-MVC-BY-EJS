@@ -14,6 +14,23 @@
 - [x] Laptop management for Administrator
 - [ ] Administrator management
 
+## Dependencies:
+* express
+* express-session
+* mysql2
+* nodemon
+* ejs
+* dotenv
+* crypto-js
+* connect-flash
+* body-parse
+
+## Dev Dependencies:
+* @babel/cli
+* @babel/core
+* @babel/node
+* @babel/preset-env
+
 ## Contributors: 
 * vuqu4ngminh
 * H1epVu

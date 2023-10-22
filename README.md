@@ -5,9 +5,10 @@
 > This project is for educational purposes only
 
 ## Features:
-- [ ] Display list of Laptop
-- [ ] Display infomations of a single Laptop
-- [ ] Cart and Payment
+- [x] Display list of Laptop
+- [x] Display infomations of a single Laptop
+- [x] Cart
+- [ ] Order
 - [x] Authentication for Administrator
 - [ ] Order management for Administrator
 - [x] Laptop management for Administrator

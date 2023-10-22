@@ -1,0 +1,12 @@
+img{
+    height: 60%;
+    width: 90%;
+}
+.detail-text{
+    font-size: x-large;
+}
+.add-cart{
+    height: 70px;
+    width: 100%;
+    font-size: larger;
+}

@@ -1,0 +1,36 @@
+#myCarousel {
+    height: 300px;
+}
+
+#myCarousel .carousel-inner .carousel-item img {
+    height: 100%;
+    width: 100%;
+}
+
+.sort{
+    padding-left: 20px;
+}
+.sort-label{
+    margin-right: 20px;
+    font-size: larger;
+    margin-top: 5px;
+}
+
+.dropdown{
+    margin-right: 20px;
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 20px; /* Khoảng cách giữa các card */
+}
+
+.card {
+    height: 100%; /* Đặt chiều cao tối đa cho card */
+}
+
+.card img {
+    height: 170px;
+    width: 290px;
+}

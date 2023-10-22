@@ -1,0 +1,85 @@
+<% 
+function formatNumber(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+%>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/detail.css">
+    <link rel="icon" href="/icon/laptop.svg" type="image/svg+xml">
+    <title><%= data[0].name %></title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="mynavbar">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link <%= activeTab === 'home' ? 'active' : '' %>" href="/">Sản Phẩm</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <%= activeTab === 'cart' ? 'active' : '' %>" href="/cart">Giỏ Hàng</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <%= activeTab === 'login' ? 'active' : '' %>" href="/admin">Quản Trị Viên</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row mt-3">
+            <div class="border border-dark rounded d-flex justify-content-between mb-5">
+                <h1 class="mt-3 mb-3"><%= data[0].name %></h1>
+                <a href="/" class="btn btn-danger mt-3 mb-3 " style="margin-right: 20px;padding-top: 10px;">Quay Lại</a>
+            </div>
+            <div class="col-8 d-flex flex-column justify-content-center">
+                <img src="<%= data[0].imageUrl %>" alt="<%= data[0].name %>">
+            </div>
+            <div class="col-4">
+                <div class="mt-5">
+                    <h2>Chi Tiết:</h2>
+                    <p class="detail-text"><%= data[0].description %></p>
+                </div>
+                <div class="mt-5">
+                    <h2>Tình Trạng:</h2>
+                    <div>
+                        <% if (data[0].status === "1") { %>
+                            <p class="text-success detail-text"><b>Còn Hàng</b></p>
+                        <% } else { %>
+                            <p class="text-danger detail-text"><b>Hết Hàng</b></p>
+                        <% } %>
+                    </div>
+                </div>
+                <div class="mt-5">
+                    <h2>Giá:</h2>
+                    <p class="detail-text"><%= formatNumber(data[0].price) %> đ</p>
+                </div>
+                <div class="mt-5">
+                    <form method="post" action="/cart/add">
+                        <input type="hidden" name="laptopId" value="<%= data[0].id %>">
+                        <input type="hidden" name="laptopName" value="<%= data[0].name %>">
+                        <input type="hidden" name="laptopPrice" value="<%= data[0].price %>">
+                        <input type="hidden" name="laptopAmount" value="1">
+                        <button type="submit" class="btn btn-success add-cart">
+                            Thêm Vào Giỏ Hàng
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -6,11 +6,11 @@
 
 ## Features:
 - [x] Display list of Laptop
-- [ ] Display infomations of a single Laptop
-- [ ] Cart and Payment
-- [ ] Authentication for Administrator
-- [ ] Order management for Administrator
-- [ ] Laptop management for Administrator
+- [x] Display infomations of a single Laptop
+- [x] Cart
+- [x] Authentication for Administrator
+- [x] Order management for Administrator
+- [x] Laptop management for Administrator
 
 ## Contributors: 
 * vuqu4ngminh

@@ -7,7 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/bootstrap-icons/font/bootstrap-icons.css">
-    <title>Laptop</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Home</title>
 </head>
 
 <body>
@@ -16,45 +18,87 @@
             <div class="collapse navbar-collapse" id="mynavbar">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0)">Sản Phẩm</a>
+                        <a class="nav-link" href="/">Sản Phẩm</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0)">Giỏ Hàng</a>
+                        <a class="nav-link" href="/cart">Giỏ Hàng</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0)">Liên Hệ</a>
-                    </li>
+                    <% if (loggedin) { %>
+                        <% if (loggedin) { %>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="/admin" role="button" data-bs-toggle="dropdown">Quản Trị Viên</a>
+                                <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item" href="/admin/order">Đơn Hàng</a></li>
+                                  <li><a class="dropdown-item" href="/admin/laptop">Sản Phẩm</a></li>
+                                </ul>
+                              </li>
+                            <% } %>
+                        <% } %>
                 </ul>
                 <form class="d-flex">
                     <input class="form-control me-2" type="text" placeholder="Nhập tên sản phẩm">
-                    <button class="btn btn-primary" type="button">Tìm Kiếm</button>
+                    <button class="btn btn-primary" type="button"><i class="bi bi-search"></i></button>
                 </form>
+                <div style="margin-left: 10px; margin-right: 10px;">
+                    <% if (loggedin) { %>
+                        <form method="post" action="/auth/logout">
+                            <button class="btn btn-danger" type="submit">
+                                Đăng xuất
+                            </button>
+                        </form>
+                        <% } else { %>
+                            <form method="get" action="/auth">
+                                <button class="btn btn-primary" type="submit">
+                                    Đăng nhập
+                                </button>
+                            </form>
+                            <% } %>
+                </div>
             </div>
         </div>
     </nav>
 
+    <!-- <div class="text-white mb-3 d-flex justify-content-between">
+        <% if (loggedin) { %>
+            <form method="get" action="/laptop/add">
+                <button class="btn btn-success" type="submit">
+                    Thêm mới
+                </button>
+            </form>
+            <form method="post" action="/auth/logout">
+                <button class="btn btn-danger" type="submit">
+                    Đăng xuất
+                </button>
+            </form>
+            <% } else { %>
+                <form method="get" action="/auth">
+                    <button class="btn btn-primary" type="submit">
+                        Đăng nhập
+                    </button>
+                </form>
+                <% } %>
+    </div> -->
+
     <div class="container">
         <div class="row">
-            <% data.forEach(function(laptop, index) { %>
+            <% data.forEach(function(laptop) { %>
                 <div class="col-md-4 col-xs-6 border-primary mb-3">
-                    <div class="card" style="max-width: 540px;">
+                    <div class="card" style="max-width: 400px;">
                         <div class="container mt-5">
                             <ul class="list-group">
-                                <div class="row g-0">
+                                <div class="row" style="height: 300px;">
                                     <div class="col-md-12">
                                         <div class="card-header text-black bg-warning">
-                                            <p class="card-text">
                                             <h5 class="card-title">
                                                 <%= laptop.name %>
                                             </h5>
-                                            </p>
                                         </div>
                                     </div>
-
+    
                                     <div class="col-md-6 mt-3 mb-3">
                                         <img src="<%= laptop.img %>" alt="<%= laptop.name %>" width="100%">
                                     </div>
-
+    
                                     <div class="col-md-6 mt-3 mb-3">
                                         <div class="card-body">
                                             <div class="text-right">
@@ -68,32 +112,32 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="card-footer">
-                                        <p class="card-text d-flex justify-content-between">
-                                            <a class="btn btn-outline-primary float-right" href="#">
-                                                Chi Tiết
-                                            </a>
-                                            <a class="btn btn-outline-primary float-right" href="#">
-                                                Sửa
-                                            </a>
-                                            <a class="btn btn-outline-primary float-right" href="#">
-                                                Xóa
-                                            </a>
-                                            <a class="btn text-white" href="#">
-
-                                            </a>
-                                        </p>
-                                    </div>
-                                </div>
                             </ul>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between">
+                            <form method="get" action="/laptop/detail/<%= laptop.id %>" class="col-md-6">
+                                <button class="btn btn-outline-primary" type="submit">
+                                    Chi tiết
+                                </button>
+                            </form>
+                            <form class="col-md-6">
+                                <% if (laptop.status == 1) { %>
+                                    <button class="btn btn-success w-100" type="submit">
+                                        Còn hàng
+                                    </button>
+                                <% } else if (laptop.status == 0) { %>
+                                    <button class="btn btn-danger w-100" disabled>
+                                        Hết hàng
+                                    </button>
+                                <% } %>
+                            </form>
                         </div>
                     </div>
                 </div>
-                <% }); %>
+            <% }); %>
         </div>
     </div>
-
+    
 </body>
 
 </html>

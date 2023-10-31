@@ -65,10 +65,16 @@ const downAmount = (req, res) => {
     });
 }
 
+// add user info
+const displayCartOrder = (req,res) => {
+    return res.render("addOrder.ejs",{message: req.flash('message')})
+}
+
 module.exports = {
     addToCart,
     deleteItem,
     displayCart,
     upAmount,
-    downAmount
+    downAmount,
+    displayCartOrder
 }

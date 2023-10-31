@@ -39,7 +39,7 @@ const deleteLaptop = async (req, res) => {
 
 // add laptop
 const displayAddForm = (req,res) => {
-    return res.render("addLaptop.ejs",{message: req.flash('message')})
+    return res.render("addLaptop.ejs",{activeTab:'adminLaptop', message: req.flash('message')})
 }
 const addLaptop = async (req, res) => {
     let name = req.body.name
@@ -61,7 +61,7 @@ const displayUpdateForm = async (req,res) => {
     let id = req.params.id
     try {
         const [rows] = await connection.execute('SELECT * FROM laptop WHERE id = ?',[id]);
-        return res.render("updateLaptop.ejs",{data: rows, message: req.flash('message')})
+        return res.render("updateLaptop.ejs",{data: rows, activeTab:'adminLaptop', message: req.flash('message')})
     } catch (error) {
         console.log(error);
         return res.redirect("/admin/laptop")

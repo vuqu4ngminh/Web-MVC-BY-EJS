@@ -93,7 +93,9 @@ function formatNumber(x) {
                 </table>
                 <div class="mt-3 d-flex justify-content-between">
                     <h1>Tổng: <%= formatNumber(total) %></h1>
-                    <button class="btn btn-success">Đặt Hàng</button>
+                    <a href="/cart/order" class="btn btn-success" style="padding-top: 15px;">
+                        Đặt Hàng
+                    </a>
                 </div>
             <% } else { %>
                 <div class="container d-flex justify-content-center">

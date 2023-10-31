@@ -2,6 +2,10 @@
 function formatNumber(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+const getDate = (date) => {
+    let currentDate = new Date(date);
+    return currentDate.toISOString().slice(0, 19).replace('T', ' ');
+}
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,70 +49,77 @@ function formatNumber(x) {
     <div class="container">
         <div class="row">
             <div class="header-laptop mt-5 d-flex justify-content-between">
-                <h3>Quản Lý Laptop</h3>
+                <h3>Quản Lý Đơn Hàng</h3>
                 <div class="d-flex">
-                    <form class="search-form-laptop" method="post" action="/admin/laptop">
+                    <form class="search-form-laptop" method="post" action="/admin/order">
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Tìm theo mã laptop" name="searchLaptop" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            <input type="text" class="form-control" placeholder="Tìm theo mã đơn hàng" name="searchOrder" aria-label="Recipient's username" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
                             </div>
                         </div>
                     </form>
                     <div class="text-white">
-                        <a href="/admin/laptop" class="btn btn-warning"><i class="bi bi-arrow-clockwise"></i></a>
+                        <a href="/admin/order" class="btn btn-warning"><i class="bi bi-arrow-clockwise"></i></a>
                     </div>
                 </div>
             </div>
-            <% if(searchLaptop.length > 0) { %>
-                <div class="alert alert-danger mt-3 mb-3"><%= searchLaptop %></div>
-            <% } else if(deleteLaptop.length > 0){ %>
-                <div class="alert alert-success mt-3 mb-3"><%= deleteLaptop %></div>
+            <% if(searchOrder.length > 0) { %>
+                <div class="alert alert-danger mt-3 mb-3"><%= searchOrder %></div>
+            <% } else if(completeOrder.length > 0){ %>
+                <div class="alert alert-success mt-3 mb-3"><%= completeOrder %></div>
             <% } %>
             <table class="table table-bordered mt-3">
                 <thead>
                     <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Tên Sản Phẩm</th>
-                        <th scope="col">Giá</th>
-                        <th scope="col">Tình Trạng</th>
-                        <th scope="col" class=" text-right">
-                            <div class="d-flex justify-content-center">
-                                <div class="text-white">
-                                    <a href="/admin/laptop/add" class="btn btn-success">Thêm Laptop</a>
+                        <th scope="col">Mã Đơn Hàng</th>
+                        <th scope="col">Tên Khách Hàng</th>
+                        <th scope="col">Tổng Giá Trị</th>
+                        <th scope="col">
+                            <div class="dropdown">
+                                <div class="dropdown-toggle" id="dropdownMenuName"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Tình Trạng 
                                 </div>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuName">
+                                    <li><a class="dropdown-item" href="/admin/order/open">Chờ Thanh Toán</a></li>
+                                    <li><a class="dropdown-item" href="/admin/order/closed">Đã Thanh Toán</a></li>
+                                    <li><a class="dropdown-item" href="/admin/order/aborted">Đã Hủy</a></li>
+                                </ul>
                             </div>
                         </th>
+                        <th scope="col">Ngày Đặt Hàng</th>
+                        <th scope="col" class=" text-right"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <% data.forEach(function(laptop) { %>
+                    <% data.forEach(function(order) { %>
                         <tr>
-                            <th scope="row"><%= laptop.id %></th>
+                            <th scope="row"><%= order.id %></th>
                             <td>
-                                <%= laptop.name %>
+                                <%= order.customerName %>
                             </td>
                             <td>
-                                <%= formatNumber(laptop.price) %> VNĐ
+                                <%= formatNumber(order.total) %> VNĐ
                             </td>
                             <td>
-                                <% if (laptop.status === '1') { %>
-                                    <div class="text-success fw-bold">Còn hàng</div>
+                                <% if (order.status === 'open') { %>
+                                    <div class="text-warning fw-bold">Chờ Thanh Toán</div>
+                                <% } else if (order.status === 'closed') { %>
+                                    <div class="text-success fw-bold">Đã Thanh Toán</div>
                                 <% } else { %>
-                                    <div class="text-danger fw-bold">Hết hàng</div>
+                                    <div class="text-danger fw-bold">Đã Hủy</div>
                                 <% } %>
+                            </td>
+                            <td>
+                                <%= getDate(order.orderDate) %>
                             </td>
                             <td>
                                 <div class="d-flex justify-content-center">
                                     <div class="action d-flex justify-content-between">
-                                        <form method="get" action="/admin/laptop/update/<%= laptop.id %>">
+                                        <form method="get" action="/admin/order/update/<%= order.id %>">
                                             <button class="btn btn-primary" type="submit">
-                                                Cập nhật
-                                            </button>
-                                        </form>
-                                        <form method="post" action="/admin/laptop/delete/<%= laptop.id %>">
-                                            <button class="btn btn-danger" type="submit">
-                                                Xóa
+                                                Chi Tiết
                                             </button>
                                         </form>
                                     </div>

@@ -18,16 +18,16 @@
             <div class="collapse navbar-collapse d-flex justify-content-between">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/home">Trang Chủ</a>
+                        <a class="nav-link <%= activeTab === 'adminHome' ? 'active' : '' %>" href="/admin/home">Trang Chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/laptop">Quản Lý Sản Phẩm</a>
+                        <a class="nav-link <%= activeTab === 'adminLaptop' ? 'active' : '' %>" href="/admin/laptop">Quản Lý Sản Phẩm</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="javascript:void(0)">Quản Lý Đơn Hàng</a>
+                        <a class="nav-link <%= activeTab === 'adminOrder' ? 'active' : '' %>" href="/admin/order">Quản Lý Đơn Hàng</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0)">Thông Tin Quản Trị Viên</a>
+                        <a class="nav-link <%= activeTab === 'adminInfo' ? 'active' : '' %>" href="/admin/update">Đổi Mật Khẩu</a>
                     </li>
                 </ul>
                 <form method="post" action="/admin/logout" class="mb-0">

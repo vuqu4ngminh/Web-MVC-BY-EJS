@@ -3,6 +3,7 @@ import userController from "../controller/userController";
 import adminController from "../controller/adminController";
 import laptopController from "../controller/laptopController";
 import cartController from '../controller/cartController';
+import orderController from '../controller/orderController';
 
 const router = express.Router()
 
@@ -14,6 +15,7 @@ const isAdmin = (req,res,next) => {
     }
 }
 const createCart = (req,res,next) => {
+    req.session.orderStatus = false
     if(!req.session.cart){
         req.session.cart = []
     }
@@ -38,9 +40,12 @@ const initWebRoutes = (app) => {
     router.get('/status/:value', userController.sortStatus)
     // search
     router.post('/search', userController.searchName)
-    
+    // order confirmation
+    router.get('/cart/order', orderController.displayAddForm)
+    router.post('/cart/order/add', orderController.addOrder)
+    router.get('/cart/order/success', orderController.displayOrderSuccess)
     // check admin
-    router.use(isAdmin)
+    // router.use(isAdmin)
     // admin (protected routes)
     router.post('/admin/logout', adminController.logoutAdmin)
     router.get('/admin/home',adminController.homeAdmin)
@@ -51,6 +56,14 @@ const initWebRoutes = (app) => {
     router.get('/admin/laptop/update/:id', laptopController.displayUpdateForm)
     router.post('/admin/laptop/update', laptopController.updateLaptop)
     router.post('/admin/laptop/delete/:id', laptopController.deleteLaptop)
+    router.get('/admin/order', orderController.displayAllOrder)
+    router.get('/admin/order/:value', orderController.displayAllOrderByStatus)
+    router.post('/admin/order', orderController.searchOrderById)
+    router.get('/admin/order/update/:id', orderController.displayDetailOrder)
+    router.post('/admin/order/update/:id', orderController.updateOrder)
+    router.post('/admin/order/delete/:id', orderController.deleteOrder)
+    router.get('/admin/update', adminController.displayUpdateForm)
+    router.post('/admin/update', adminController.updateAdmin)
 
     return app.use("/", router)
 }

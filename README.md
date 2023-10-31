@@ -8,11 +8,12 @@
 - [x] Display list of Laptop
 - [x] Display infomations of a single Laptop
 - [x] Cart
-- [ ] Order
+- [x] Order
+- [x] Statistics Page
 - [x] Authentication for Administrator
-- [ ] Order management for Administrator
+- [x] Order management for Administrator
 - [x] Laptop management for Administrator
-- [ ] Administrator management
+- [x] Administrator Information management
 
 ## Dependencies:
 * express

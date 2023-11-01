@@ -45,7 +45,7 @@ const initWebRoutes = (app) => {
     router.post('/cart/order/add', orderController.addOrder)
     router.get('/cart/order/success', orderController.displayOrderSuccess)
     // check admin
-    // router.use(isAdmin)
+    router.use(isAdmin)
     // admin (protected routes)
     router.post('/admin/logout', adminController.logoutAdmin)
     router.get('/admin/home',adminController.homeAdmin)
